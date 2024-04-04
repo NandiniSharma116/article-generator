@@ -4,6 +4,7 @@ const block = document.getElementById("Block");
 const data = document.getElementById("Article");
 const Toast = document.getElementById("Toast");
 generate.addEventListener("click", () => {
+    loading.classList.remove('hidden')
   block.classList.remove("hidden");
   data.innerText =
     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab repellendus laudantium dicta quia? Magnam aliquam quibusdam, fugiat ratione repellendus esse dolore quos vero odio tempore inventore sit ipsum architecto eligendi?";
