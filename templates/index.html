@@ -1,34 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en" data-theme="forest">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Article Generator</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.9.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.9.0/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    <div class="navbar bg-base-100">
-        <div class="flex-1">
-          <a class="btn btn-ghost text-xl">daisyUI</a>
-        </div>
-        <div class="flex-none">
-          <ul class="menu menu-horizontal px-1">
-            <li><a>Link</a></li>
-            <li>
-              <details>
-                <summary>
-                  Parent
-                </summary>
-                <ul class="p-2 bg-base-100 rounded-t-none">
-                  <li><a>Link 1</a></li>
-                  <li><a>Link 2</a></li>
-                </ul>
-              </details>
-            </li>
-          </ul>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+
+    <div class="flex flex-col items-center justify-center px-52 py-20">
+      <div class="flex flex-row w-full justify-center">
+        <button id="generate" class="btn btn-ghost">Generate</button>
+        <input
+          type="text"
+          placeholder="Type here"
+          class="input input-bordered input-ghost w-full"
+        />
+      </div>
+      <div id="Loading" class="hidden mt-20 justify-center items-center p-2">
+        <span class="loading loading-spinner text-primary"></span>
+      </div>
+      <div id="Block" class="hidden mt-20 justify-center items-center border-[0.5px] border-zinc-400 rounded-xl p-2">
+        <center>
+        <p id="Article" class="text-primary cursor-pointer hover:text-secondary">
+            
+        </p>
+        </center>
+      </div>
+    </div>
+    <div id="Toast" class="hidden toast">
+        <div class="alert alert-success">
+          <span class="text-white font-bold">Copied Sucessfully!</span>
         </div>
       </div>
-</body>
+    <script>
+        const generate = document.getElementById('generate');
+        const loading = document.getElementById('Loading');
+        const block = document.getElementById("Block");
+        const data = document.getElementById('Article');
+        const Toast = document.getElementById('Toast');
+        generate.addEventListener('click', () => {
+            block.classList.remove('hidden');
+            data.innerText = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab repellendus laudantium dicta quia? Magnam aliquam quibusdam, fugiat ratione repellendus esse dolore quos vero odio tempore inventore sit ipsum architecto eligendi?"
+        });
+        data.addEventListener('click', () => {
+            const tempTextarea = document.createElement('textarea');
+            tempTextarea.value = data.innerText;
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempTextarea);
+            Toast.classList.remove('hidden')
+            setInterval(()=>{
+                Toast.classList.add('hidden')
+            }, 3000)
+        });
+    </script>
+  </body>
 </html>
