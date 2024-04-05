@@ -1,13 +1,26 @@
 const generate = document.getElementById("generate");
+const query = document.getElementById('Search')
 const loading = document.getElementById("Loading");
 const block = document.getElementById("Block");
 const data = document.getElementById("Article");
 const Toast = document.getElementById("Toast");
-generate.addEventListener("click", () => {
-    loading.classList.remove('hidden')
-  block.classList.remove("hidden");
-  data.innerText =
-    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab repellendus laudantium dicta quia? Magnam aliquam quibusdam, fugiat ratione repellendus esse dolore quos vero odio tempore inventore sit ipsum architecto eligendi?";
+generate.addEventListener("click", async() => {
+loading.classList.remove('hidden')
+  try {
+        const response = await fetch("/generate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({data:query.value})
+        });
+        const responseData = await response.json();
+        block.classList.remove("hidden");
+        data.innerText = responseData.success
+        loading.classList.add('hidden')
+    } catch (err) {
+        console.log("There was an error:", err);
+    }
 });
 data.addEventListener("click", () => {
   const tempTextarea = document.createElement("textarea");
