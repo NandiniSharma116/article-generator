@@ -18,14 +18,14 @@
     {% include 'navbar.html' %}
 
     <div class="lg:px-52 px-10 flex flex-col items-center justify-center">
-        <div class="mt-20 flex flex-col items-center justify-center lg:flex-row-reverse">
+        <div class="mt-20 flex flex-col items-center justify-center lg:flex-row-reverse w-full">
             <input
               type="text"
               placeholder="Type here"
               class="input input-bordered input-ghost w-full"
               id="Search"
             />
-            <button id="generate" class="btn btn-ghost mt-5 lg:mt-0">Generate</button>
+            <button id="generate" class="btn btn-accent mt-5 lg:mt-0">Generate</button>
         </div>
         <div id="Loading" class="hidden mt-10 justify-center items-center p-2">
             <span class="loading loading-spinner text-primary"></span>
